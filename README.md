@@ -183,16 +183,6 @@ It is also not a live feed — the header carries the date the snapshot was gene
 | `tools/` | the build pipeline, the mapping engine, the health check, the tests |
 | `DEPLOY.md` | deployment and data-refresh notes |
 
-## Running it locally
-
-```
-npm run serve
-```
-
-Open <http://localhost:8080>. Nothing to install. Opening `index.html` directly off disk won't
-work — browsers block `fetch` on `file://`.
-
-To see it without the real network, `npm run sample` swaps in an invented one on the same taxonomy.
 
 ## Known limits
 
