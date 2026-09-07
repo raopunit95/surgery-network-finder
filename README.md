@@ -2,13 +2,23 @@
 
 **Find a hospital that will do your surgery cashless, near you, on your insurance — and see which doctors there actually perform it.**
 
-🔗 **[Try it →](https://raopunit95.github.io/surgery-network-finder/)**
+🔗 **[Try the prototype →](https://raopunit95.github.io/surgery-network-finder/)**
 
 ```
 pincode  ──►  hospitals matching surgery + insurer  ──►  doctors at the chosen hospital
 ```
 
 648 hospitals · 3,547 doctors · 218 surgeries · 144 cities · 36 insurers
+
+> ### 🏥 This shipped
+>
+> The approach proven here now runs in production at MediBuddy as the
+> **[Cashless Hospital Finder](https://www.medibuddy.in/surgery-care/find-hospitals)**, where it
+> generates **~50 leads a day, converting to ~30 surgeries and ₹21 lakh of booked value per month.**
+>
+> This repository is the prototype that came first — built to prove the distance ranking and the
+> condition-to-speciality matching before committing an engineering sprint to them. It runs on a
+> point-in-time snapshot of the network and is not the production system.
 
 ---
 
@@ -183,6 +193,16 @@ It is also not a live feed — the header carries the date the snapshot was gene
 | `tools/` | the build pipeline, the mapping engine, the health check, the tests |
 | `DEPLOY.md` | deployment and data-refresh notes |
 
+## Running it locally
+
+```
+npm run serve
+```
+
+Open <http://localhost:8080>. Nothing to install. Opening `index.html` directly off disk won't
+work — browsers block `fetch` on `file://`.
+
+To see it without the real network, `npm run sample` swaps in an invented one on the same taxonomy.
 
 ## Known limits
 
@@ -195,3 +215,5 @@ It is also not a live feed — the header carries the date the snapshot was gene
 ---
 
 Built by **[Punit Yadav](https://github.com/raopunit95)** · Senior Manager – Product, MediBuddy
+
+Production version: **[medibuddy.in/surgery-care/find-hospitals](https://www.medibuddy.in/surgery-care/find-hospitals)** · Portfolio: **[raopunit95/punit-yadav](https://github.com/raopunit95/punit-yadav)**
