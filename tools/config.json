@@ -1,0 +1,52 @@
+{
+  "sheetId": "12wCl-OCSWSGezd7ZXrenTj8NldSTiw9V5VsjYI0gVU0",
+
+  "hospitals": {
+    "tab": "Bot_Hosp",
+    "activeValue": "Active",
+    "columns": {
+      "code":         ["Hospital_Code"],
+      "status":       ["Status"],
+      "name":         ["Hospital_Name_Long", "Hospital_Name", "Name"],
+      "nameShort":    ["Hospital_Name_Short", "Short_Name"],
+      "lat":          ["latitude_hospital", "Latitude"],
+      "lon":          ["longitude_hospital", "Longitude"],
+      "city":         ["City"],
+      "locality":     ["Locality", "Area"],
+      "state":        ["State_Name", "State"],
+      "address":      ["Address"],
+      "pincode":      ["PinCode", "Pincode", "Pin_Code"],
+      "ipd":          ["IPD"],
+      "rating":       ["Rating"],
+      "reviews":      ["Reviews"],
+      "specialities": ["Speciality", "Specialty", "Specialities"],
+      "insurers":     ["Short_Ins", "Insurance", "Insurers"],
+      "mapUrl":       ["GMap_Link", "Map_Link"]
+    }
+  },
+
+  "doctors": {
+    "tab": "Bot_Doc",
+    "activeValue": "Active",
+    "columns": {
+      "code":            ["Doctor_Code"],
+      "hospitalCode":    ["Hospital_Code"],
+      "status":          ["Status"],
+      "name":            ["Doctor", "Doctor_Name", "Name"],
+      "speciality":      ["Speciality", "Specialty"],
+      "qualification":   ["Degree1", "Qualification", "Degree"],
+      "experienceYears": ["Years_of_Experience", "Experience"],
+      "schedule":        ["OPD_Schedule", "Schedule"],
+      "type":            ["DoctorType", "Doctor_Type"]
+    }
+  },
+
+  "listSeparator": ",",
+
+  "validation": {
+    "minHospitals": 10,
+    "minDoctors": 10,
+    "maxOrphanDoctorRatio": 0.15,
+    "maxMissingCoordRatio": 0.10
+  }
+}

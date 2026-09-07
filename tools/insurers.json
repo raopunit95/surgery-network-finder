@@ -1,0 +1,153 @@
+{
+  "_comment": "Canonical insurer names → the raw Short_Ins variants seen in the sheet. Keys are matched after lowercasing and stripping everything except letters and digits. The sheet carries 70 distinct spellings for ~36 real insurers; without this map a user picking 'Star' misses every hospital that wrote 'Star Health Insurance'.",
+  "Acko": [
+    "acko",
+    "ackogeneralinsurance"
+  ],
+  "Aditya Birla": [
+    "adityabirla",
+    "adityabirlahealthinsurance"
+  ],
+  "Bajaj Allianz": [
+    "bajajallianz",
+    "bajajallianzgeneralinsurance"
+  ],
+  "Bharti AXA": [
+    "bhartiaxa"
+  ],
+  "Care Health": [
+    "carehealth",
+    "carehealthinsurance"
+  ],
+  "Cholamandalam MS": [
+    "cholamandalam",
+    "cholamandalammsgeneralinsurance"
+  ],
+  "Edelweiss": [
+    "edelweiss",
+    "edelweisstokiolifeinsurance"
+  ],
+  "Future Generali": [
+    "futuregenerali",
+    "futuregeneraliindialifeinsurancecoltd"
+  ],
+  "Go Digit": [
+    "godigit",
+    "godigithealthinsurance"
+  ],
+  "HDFC Ergo": [
+    "hdfcergo",
+    "hdfcergohealthinsurance"
+  ],
+  "ICICI Lombard": [
+    "icicilombard",
+    "icicilombardhealthinsurance"
+  ],
+  "IFFCO Tokio": [
+    "iffcotokio",
+    "iffcotokiogeneralinsurancecompanylimited"
+  ],
+  "IndiaFirst": [
+    "indiafirst"
+  ],
+  "Kotak Mahindra": [
+    "kotakmahindra",
+    "kotakmahindrageneralinsurancecompanyltd"
+  ],
+  "Liberty": [
+    "liberty",
+    "libertygeneralinsuranceltd"
+  ],
+  "Magma HDI": [
+    "magmahdi",
+    "magmahdigeneralinsurancecompanyltd"
+  ],
+  "Manipal Cigna": [
+    "manipalcigna",
+    "manipalcignahealthinsurance"
+  ],
+  "Medvantage": [
+    "medvantage",
+    "medvantageinsurancetpapvtltd"
+  ],
+  "National Insurance": [
+    "nationalhealth",
+    "nationalhealthinsurance",
+    "nationalinsurance"
+  ],
+  "Navi": [
+    "navi"
+  ],
+  "New India Assurance": [
+    "newindia",
+    "newindiaassurance"
+  ],
+  "Niva Bupa": [
+    "nivabupa"
+  ],
+  "Oriental Insurance": [
+    "oriental",
+    "orientalhealthinsurance",
+    "orientalinsurance"
+  ],
+  "Raheja QBE": [
+    "raheja",
+    "rahejaqbegeneralinsurancecompanylimited"
+  ],
+  "Reliance General": [
+    "reliancegeneral",
+    "reliancegeneralinsurance"
+  ],
+  "Reliance Life": [
+    "reliancelife",
+    "reliancenipponlifeinsurance"
+  ],
+  "Royal Sundaram": [
+    "royalsundaram",
+    "royalsundaramgeneralinsurance"
+  ],
+  "SBI General": [
+    "sbi",
+    "sbigeneralinsurance"
+  ],
+  "Shikhar": [
+    "shikhar",
+    "shikharinsurancecoltd"
+  ],
+  "Star Health": [
+    "star",
+    "starhealthinsurance"
+  ],
+  "Tata AIA": [
+    "tataaia",
+    "tataaialifeinsurance"
+  ],
+  "Tata AIG": [
+    "tataaig",
+    "tataaiggeneralinsurance"
+  ],
+  "United India": [
+    "united",
+    "unitedhealthinsurance",
+    "unitedindiainsurance"
+  ],
+  "Universal Sompo": [
+    "universalsompo",
+    "universalsompogeneralinsurancecoltd"
+  ],
+  "Self-pay / Cash": [
+    "cash"
+  ],
+  "Other insurers": [
+    "others"
+  ],
+  "_drop": {
+    "_comment": "Values that are not insurers. 'a', 'aa' and 'ri' are data-entry artefacts; the long run-on string is one cell where a whole list was pasted without separators.",
+    "values": [
+      "a",
+      "aa",
+      "ri"
+    ],
+    "dropLongerThanChars": 60
+  }
+}

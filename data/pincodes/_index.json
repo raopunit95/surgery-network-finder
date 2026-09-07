@@ -1,0 +1,7 @@
+{
+ "pincodeCount": 19441,
+ "shardCount": 405,
+ "droppedOffices": 10964,
+ "pinsCleaned": 4297,
+ "method": "median lat/long per pincode, after dropping offices >50km from that median"
+}

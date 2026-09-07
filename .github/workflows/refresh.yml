@@ -1,0 +1,36 @@
+name: Refresh inventory
+
+on:
+  schedule:
+    - cron: '30 20 * * *'      # 02:00 IST daily
+  workflow_dispatch:            # and a manual "Run workflow" button
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Pull from Google Sheet
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+        run: npm run sync
+
+      - name: Commit if anything changed
+        run: |
+          if git diff --quiet -- data/; then
+            echo "inventory unchanged"
+            exit 0
+          fi
+          git config user.name  "inventory-bot"
+          git config user.email "actions@github.com"
+          git add data/
+          git commit -m "Refresh inventory ($(date -u +%Y-%m-%d))"
+          git push

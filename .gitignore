@@ -1,0 +1,12 @@
+# Raw exports — never commit. They carry columns the app does not use
+# (hospital emails, internal record IDs, ops workflow dates).
+incoming/*.csv
+incoming/*.xlsx
+
+# Secrets
+.env
+service-account*.json
+
+node_modules/
+.DS_Store
+*.tmp

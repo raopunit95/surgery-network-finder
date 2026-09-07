@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Surgery Network Finder</title>
+<meta name="description" content="Find cashless hospitals near a pincode by speciality and insurance, then see the doctors available at that hospital.">
+<meta name="theme-color" content="#0b57d0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b57d0'/%3E%3Cpath d='M13 7h6v6h6v6h-6v6h-6v-6H7v-6h6z' fill='white'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">✚</span>
+      <div class="brand-text">
+        <strong>Surgery Network Finder</strong>
+        <span>Cashless hospitals near you, and who operates there</span>
+      </div>
+    </div>
+    <div class="dataline" id="dataline"></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ─────────────────────────── Search ─────────────────────────── -->
+  <section id="searchView" class="view is-active" aria-label="Hospital search">
+    <div id="sampleBanner" class="banner" hidden></div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h1>Find a hospital</h1>
+        <p>Enter your pincode, the treatment you need, and your insurer.</p>
+      </div>
+
+      <!-- Step 1 — Pincode -->
+      <div class="field">
+        <label class="field-label" for="pincodeInput">
+          <span class="step-dot">1</span> Pincode
+        </label>
+        <input id="pincodeInput" class="control" type="text" inputmode="numeric"
+               autocomplete="postal-code" maxlength="6" placeholder="e.g. 560066">
+        <p class="field-hint" id="pincodeHint">Six digits. Used only to measure distance.</p>
+      </div>
+
+      <!-- Step 2 — Speciality -->
+      <div class="field">
+        <label class="field-label" for="surgeryInput">
+          <span class="step-dot">2</span> Surgery or treatment
+        </label>
+        <div class="combo">
+          <input id="surgeryInput" class="control" type="text" autocomplete="off"
+                 role="combobox" aria-expanded="false" aria-controls="surgeryList"
+                 placeholder="Start typing — Piles, Cataract, Knee-Replacement, IVF…">
+          <button type="button" class="combo-clear" data-clear="surgery" hidden aria-label="Clear surgery">×</button>
+          <ul id="surgeryList" class="options" role="listbox" hidden></ul>
+        </div>
+        <p class="field-hint" id="surgeryHint"></p>
+      </div>
+
+      <!-- Step 3 — Insurance -->
+      <div class="field">
+        <label class="field-label" for="insurerInput">
+          <span class="step-dot">3</span> Insurance
+          <span class="badge-optional">optional</span>
+        </label>
+        <div class="combo">
+          <input id="insurerInput" class="control" type="text" autocomplete="off"
+                 role="combobox" aria-expanded="false" aria-controls="insurerList"
+                 placeholder="Leave blank to see every hospital">
+          <button type="button" class="combo-clear" data-clear="insurer" hidden aria-label="Clear insurer">×</button>
+          <ul id="insurerList" class="options" role="listbox" hidden></ul>
+        </div>
+        <p class="field-hint" id="insurerHint">Skip this and we'll show all hospitals, cashless or not.</p>
+      </div>
+
+      <button id="searchBtn" class="btn" disabled>Find hospitals</button>
+      <p class="field-hint" id="searchHint" style="text-align:center;margin-top:10px"></p>
+    </div>
+
+    <p class="foot" id="foot"></p>
+  </section>
+
+  <!-- ─────────────────────────── Results ────────────────────────── -->
+  <section id="resultsView" class="view" aria-label="Hospital results">
+    <div class="results-head">
+      <div>
+        <h2 id="resultsTitle">Hospitals</h2>
+        <p id="resultsSub"></p>
+        <div class="crit" id="resultsCrit"></div>
+      </div>
+      <div class="spacer"></div>
+      <button class="btn btn-ghost" data-go="search">← Change search</button>
+    </div>
+    <div class="sortbar" id="sortBar" role="group" aria-label="Sort results" hidden></div>
+    <div id="resultsBody"></div>
+  </section>
+
+  <!-- ─────────────────────── Hospital detail ────────────────────── -->
+  <section id="detailView" class="view" aria-label="Hospital detail">
+    <div class="results-head">
+      <div class="detail-head">
+        <h2 id="detailName">Hospital</h2>
+        <p class="addr" id="detailAddr"></p>
+      </div>
+      <div class="spacer"></div>
+      <button class="btn btn-ghost" data-go="results">← Back to results</button>
+    </div>
+    <div class="kpis" id="detailKpis"></div>
+    <div id="detailBody"></div>
+  </section>
+
+</main>
+
+<footer class="sitefoot">
+  <p>
+    Built by <a href="https://raopunit95.github.io/punit-yadav/" target="_blank" rel="noopener">Punit Yadav</a>
+    · <a href="https://github.com/raopunit95/surgery-network-finder" target="_blank" rel="noopener">Source on GitHub</a>
+  </p>
+  <p class="sitefoot-note">
+    Distances are measured from the centre of your pincode. Confirm cashless eligibility with the
+    hospital before you travel.
+  </p>
+</footer>
+
+<script src="app.js?v=3"></script>
+</body>
+</html>

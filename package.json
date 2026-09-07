@@ -1,0 +1,21 @@
+{
+  "name": "surgery-network-finder",
+  "version": "1.0.0",
+  "description": "Find cashless hospitals near a pincode by speciality and insurer, then see the doctors at that hospital. Static site, no backend.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "sync": "node tools/sync.mjs",
+    "sync:dry": "node tools/sync.mjs --dry-run",
+    "import": "node tools/import-csv.mjs",
+    "import:dry": "node tools/import-csv.mjs --dry-run",
+    "sample": "node tools/make-sample-data.mjs",
+    "pincodes": "node tools/build-pincodes.mjs",
+    "surgeries": "node tools/build-surgeries.mjs",
+    "overrides": "node tools/apply-overrides.mjs",
+    "test": "node tools/test-overrides.mjs && node tools/test-e2e.mjs",
+    "test:e2e": "node tools/test-e2e.mjs",
+    "serve": "python3 -m http.server 8080"
+  },
+  "engines": { "node": ">=18" }
+}

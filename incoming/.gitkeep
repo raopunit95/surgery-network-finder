@@ -1,0 +1,2 @@
+Drop Bot_Hosp.csv and Bot_Doc.csv here, then run: npm run import
+(CSV files in this folder are git-ignored.)

@@ -1,0 +1,33 @@
+{
+  "_comment": [
+    "Secondary departments only. The hospital-speciality → department mapping now lives in",
+    "incoming/Dept_Map.tsv, which is the authoritative sheet.",
+    "",
+    "A secondary department says: this surgery is commonly performed by another team, so a hospital",
+    "listing that other department should also match. Resolution is transitive and cycle-safe.",
+    "",
+    "Without these, 'Piles' returns nothing — its department is Proctology and no active hospital",
+    "lists Proctology, even though Proctology exists in the speciality master."
+  ],
+
+  "secondary": {
+    "Laparoscopy":        ["General Surgery"],
+    "Proctology":         ["General Surgery"],
+    "General Medicine":   ["General Surgery"],
+    "Fertility":          ["Gynaecology"],
+
+    "Gastrointestinal":   ["General Surgery"],
+    "Transplant Surgery": ["General Surgery"],
+    "Neurology":          ["Neurosurgery"]
+  },
+
+  "_provenance": {
+    "yours": ["Laparoscopy", "Proctology", "General Medicine", "Fertility"],
+    "addedByAnalysis": {
+      "Gastrointestinal": "GI surgery is done by general surgeons at most panel hospitals",
+      "Transplant Surgery": "no hospital lists it; kidney/liver transplant may also warrant Urology / Nephrology",
+      "Neurology": "only 'Pediatric Neurology' exists hospital-side, so adult neurology resolves to nothing otherwise"
+    },
+    "_note": "Confirm the three under addedByAnalysis — they are clinical judgements."
+  }
+}

@@ -1,0 +1,58 @@
+Hospital_Speciality	Department_Name
+OBG	Gynaecology
+General Surgery	General Surgery
+Cardiology	Cardiology
+ENT	ENT
+Plastic Surgery	Aesthetic
+Ortho Surgery	Orthopaedic
+Urology	Urology
+Nephrology	Nephrology
+Neurosurgery	Neurosurgery
+Surgical Gastroenterology	Gastrointestinal
+Medical Gastroenterology	Gastrointestinal
+CTVS	Cardiology
+Rheumatology	Rheumatologist
+Dermataology	Aesthetic
+Oncology	Oncology
+Haematology	Haematology
+Endocrinology	Endocrinology
+Spine	Neurosurgery
+Neuropsychiatry	Neurosurgery
+Physiotherapy	Physiotherapy
+Pulmonology	Pulmonology
+Ophthalmology	Ophthalmology
+Ayurveda	Ayush
+Anesthesiology	Anesthesiology
+Proctology	Proctology
+Vascular Surgery	Vascular
+Internal Medicine	General Medicine
+Pediatrics	Pediatrics
+Radiology	Radiology
+Dentistry	Dental
+Psychiatry	Psychiatry
+Dietary	General Medicine
+podiatry	Orthopaedic
+Laboratory Medicine	General Medicine
+Psychology	Psychology
+Emergency Medicine	General Medicine
+Neonatology	Pediatrics
+Critical Care Medicine	General Medicine
+Interventional Radiology	Radiology
+Reproductive Medicine	Fertility
+Biliary Medicine	General Medicine
+Pediatrics and Neonatology	Pediatrics
+Surgical Oncology	Oncology
+Medical Oncology	Oncology
+AyurVaid ENT	ENT
+AyurVaid General Medicine	General Medicine
+AyurVaid General Surgery	General Surgery
+AyurVaid OBG	Gynaecology
+Fetal Medicine	Gynaecology
+Hair Transplant	Aesthetic
+Hair Transplant & Dermataology	Aesthetic
+IVF & Gynec	Fertility|Gynaecology
+Laparoscopy	Laparoscopy
+Medical Cosmetology	Aesthetic
+Pediatric Neurology	Pediatrics|Neurology
+Pharmacology	General Medicine
+Radiation Oncology	Oncology
