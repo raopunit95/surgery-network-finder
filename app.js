@@ -4,17 +4,23 @@
    pincode + speciality + insurer  →  ranked hospitals  →  doctors at that hospital
 
    Everything runs in the browser against static JSON. No API, no key, no backend.
+
+   What gets fetched, and when:
+
+     on load     data/meta.json          counts, insurer list          ~1 KB
+                 data/surgeries.json     218 surgeries → specialities  ~4 KB
+     on search   data/pincodes/NNN.json  one shard of pincode centres  ~1 KB
+                 data/hospitals.json     the search index             ~30 KB
+     on a click  data/detail/N.json      address, map link, doctors    ~3 KB
+
+   Nothing loads that the current screen does not need. The doctor roster used to
+   be one 116 KB file fetched to show five names.
    ========================================================================== */
 'use strict';
 
 const DATA = 'data';
 const MAX_OPTIONS = 60;
 
-/* Distance bands, in km. Inside each band hospitals are ordered by `score`
-   (volume + reputation), not by distance — a busy hospital 8 km away is a
-   better answer for surgery than a quiet one 3 km away. Past the last band
-   we fall back to pure distance, because at that range proximity is the
-   only thing the user still cares about. */
 /* Distance bands, in km, covering the whole country. Fine near the user and
    coarse far away, because the difference between 8 km and 18 km changes what
    you do and the difference between 1,100 km and 1,300 km does not.
@@ -61,18 +67,68 @@ const SORTS = {
 
 const state = {
   meta: null,
-  hospitals: null,
-  doctors: null,
+  hospitals: null, // decoded search index
+  dict: null,      // { city, state, spec, ins } — the shared vocabulary
   surgeries: null,
   surgery: null,
   insurer: null,
   pin: null,
+  wantedSpec: new Set(),     // speciality indexes this surgery searches
+  wantedNames: new Set(),    // the same, as names, for matching doctors
   pool: [],        // every match anywhere, with km, nearest first
   results: [],     // what is currently on screen
   matchedTotal: 0,
   sort: 'recommended',
   hospital: null,
 };
+
+/* ── the compact hospital format ──────────────────────────────────────────
+   hospitals.json is rows of values under a `cols` header, with city, state and
+   speciality dictionaried and insurers held as a bitmask over the sorted insurer
+   list. Positions come from `cols`, never hard-coded: adding a field to the
+   builder must not silently shift every value by one. */
+
+const POPCOUNT = [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4];
+
+/** Does this hospital take dict.ins[i]? Trailing empty nibbles are stripped
+ *  when the mask is written, so a missing digit reads as zero. */
+const hasInsurer = (mask, i) => ((parseInt(mask[i >> 2] || '0', 16) >> (i & 3)) & 1) === 1;
+
+function decodeHospitals(packed) {
+  const at = {};
+  packed.cols.split(',').forEach((k, i) => { at[k] = i; });
+  const { city, state: states } = packed.dict;
+
+  return packed.rows.map((r) => {
+    const nameShort = r[at.short];
+    const cityName = city[r[at.city]] ?? '';
+    const locality = r[at.locality];
+    const mask = r[at.ins] || '';
+    let insurerCount = 0;
+    for (const ch of mask) insurerCount += POPCOUNT[parseInt(ch, 16)] ?? 0;
+
+    return {
+      code: r[at.code],
+      // Stored empty when it is exactly short_city_locality, which it is for
+      // almost every row. Rebuilt here rather than shipped 650 times.
+      name: r[at.name] || [nameShort, cityName, locality].join('_'),
+      nameShort,
+      city: cityName,
+      locality,
+      state: states[r[at.state]] ?? '',
+      pincode: r[at.pin] || null,
+      lat: r[at.lat],
+      lon: r[at.lon],
+      ipd: r[at.ipd],
+      rating: r[at.rating],
+      reviews: r[at.reviews],
+      score: r[at.score],
+      spec: r[at.spec],          // indexes into dict.spec
+      ins: mask,
+      insurerCount,
+    };
+  });
+}
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) =>
@@ -116,9 +172,14 @@ async function init() {
   const byName = new Map(state.surgeries.map((x) => [x.name, x]));
   combobox('surgery', state.surgeries.map((x) => x.name), () => {
     const s = byName.get(state.surgery);
-    $('surgeryHint').textContent = s
-      ? `${s.departments.join(', ')}${s.secondary.length ? ` (also searched under ${s.secondary.join(', ')})` : ''}`
-      : `${state.surgeries.length} surgeries and treatments.`;
+    // An explicitly targeted surgery names its own departments, so showing the
+    // filing department would be actively misleading — "Rhinoplasty · Aesthetic"
+    // when what it searches is Plastic Surgery and ENT.
+    $('surgeryHint').textContent = !s
+      ? `${state.surgeries.length} surgeries and treatments.`
+      : s.via === 'explicit'
+        ? `Searched under ${s.specialities.join(', ')}`
+        : `${s.departments.join(', ')}${s.secondary.length ? ` (also searched under ${s.secondary.join(', ')})` : ''}`;
     refreshButton();
   });
   combobox('insurer', m.insurers, () => refreshButton());
@@ -245,11 +306,15 @@ async function runSearch() {
   btn.textContent = 'Searching…';
 
   try {
-    const [loc, hospitals] = await Promise.all([
+    const [loc, packed] = await Promise.all([
       lookupPincode(pin),
-      state.hospitals ? Promise.resolve(state.hospitals) : getJSON(`${DATA}/hospitals.json`),
+      state.hospitals ? null : getJSON(`${DATA}/hospitals.json`),
     ]);
-    state.hospitals = hospitals;
+    if (packed) {
+      state.dict = packed.dict;
+      state.hospitals = decodeHospitals(packed);
+    }
+    const hospitals = state.hospitals;
 
     if (!loc) {
       $('pincodeHint').classList.add('err');
@@ -259,14 +324,24 @@ async function runSearch() {
     }
     state.pin = { code: pin, lat: loc[0], lon: loc[1], district: loc[2], state: loc[3] };
 
+    // Match on speciality indexes rather than strings: the surgery's speciality
+    // names are resolved to indexes once here, instead of 650 string comparisons
+    // against every hospital's list on every search.
     const surgery = state.surgeries.find((x) => x.name === state.surgery);
-    const wanted = new Set(surgery ? surgery.specialities : []);
-    state.wanted = wanted;
-    const ins = state.insurer;
+    state.wantedNames = new Set(surgery ? surgery.specialities : []);
+    state.wantedSpec = new Set(
+      [...state.wantedNames].map((n) => state.dict.spec.indexOf(n)).filter((i) => i >= 0)
+    );
+    // -1 means "no insurer chosen". An insurer that is chosen but absent from the
+    // dictionary must match nothing, not everything — the difference between
+    // "any insurer" and "an insurer no hospital carries".
+    const insIdx = state.insurer ? state.dict.ins.indexOf(state.insurer) : -1;
+    const insurerOk = state.insurer && insIdx < 0
+      ? () => false
+      : (h) => insIdx < 0 || hasInsurer(h.ins, insIdx);
+
     const matched = hospitals.filter(
-      (h) => h.lat !== null &&
-        h.specialities.some((sp) => wanted.has(sp)) &&
-        (!ins || h.insurers.includes(ins))
+      (h) => h.lat !== null && h.spec.some((i) => state.wantedSpec.has(i)) && insurerOk(h)
     );
 
     // Keep every match, not just the ones in range. Sorting by rating has to see
@@ -388,8 +463,14 @@ function hospitalCard(h) {
   const bits = [];
   if (h.rating) bits.push(`<span><span class="rating">★ ${h.rating}</span>${h.reviews ? ` (${h.reviews.toLocaleString('en-IN')})` : ''}</span>`);
   if (h.ipd) bits.push(`<span><b>${h.ipd.toLocaleString('en-IN')}</b> admissions</span>`);
-  bits.push(`<span><b>${h.insurers.length}</b> insurers</span>`);
-  if (h.specialities.length) bits.push(`<span><b>${h.specialities.length}</b> specialities</span>`);
+  bits.push(`<span><b>${h.insurerCount}</b> insurers</span>`);
+  if (h.spec.length) bits.push(`<span><b>${h.spec.length}</b> specialities</span>`);
+
+  // Which of this hospital's specialities actually matched. Showing it makes a bad
+  // mapping visible: if "Rhinoplasty" says it matched on "Hair Transplant", the
+  // row is wrong and anyone can see it. Hidden, that stays a silent wrong answer.
+  const hit = h.spec.filter((i) => state.wantedSpec.has(i)).map((i) => state.dict.spec[i]);
+
   return `
   <button class="card" data-code="${esc(h.code)}">
     <div class="card-top">
@@ -397,12 +478,24 @@ function hospitalCard(h) {
       <span class="card-dist">${h.km < 1 ? '<1' : h.km.toFixed(1)} km</span>
     </div>
     <div class="card-sub">${esc([h.locality, h.city].filter(Boolean).join(', '))}</div>
+    ${hit.length ? `<div class="card-hit">${hit.map((x) => `<span>${esc(x)}</span>`).join('')}</div>` : ''}
     <div class="card-meta">${bits.join('')}</div>
     <div class="card-foot">See doctors for ${esc(state.surgery)} →</div>
   </button>`;
 }
 
 /* ── hospital detail ──────────────────────────────────────────────────── */
+
+/* Must match `detailShard` in tools/lib.mjs. `npm test` asserts the two agree,
+   because a mismatch is a 404 on every hospital rather than an obvious error. */
+const DETAIL_SHARD = 25;
+const detailShard = (code) => {
+  code = String(code);
+  if (/^\d+$/.test(code)) return String(Math.floor(+code / DETAIL_SHARD));
+  let n = 0;
+  for (let i = 0; i < code.length; i++) n = (n * 31 + code.charCodeAt(i)) % 32;
+  return `x${n}`;
+};
 
 async function openHospital(code) {
   const h = state.results.find((x) => x.code === code)
@@ -411,30 +504,36 @@ async function openHospital(code) {
   if (!h) return;
   state.hospital = h;
 
+  const fallbackAddr = [h.locality, h.city, h.state].filter(Boolean).join(', ');
   $('detailName').textContent = h.name;
-  $('detailAddr').textContent = h.address || [h.locality, h.city, h.state].filter(Boolean).join(', ');
+  $('detailAddr').textContent = fallbackAddr;
   $('detailKpis').innerHTML = [
     [`${h.km ? h.km.toFixed(1) : '—'} km`, `from ${state.pin.code}`],
     [h.rating ? `★ ${h.rating}` : '—', h.reviews ? `${h.reviews.toLocaleString('en-IN')} reviews` : 'no reviews'],
     [h.ipd ? h.ipd.toLocaleString('en-IN') : '—', 'admissions'],
-    [h.specialities.length, 'specialities'],
-    [h.insurers.length, 'insurers'],
+    [h.spec.length, 'specialities'],
+    [h.insurerCount, 'insurers'],
   ].map(([b, s]) => `<div class="kpi"><b>${esc(b)}</b><span>${esc(s)}</span></div>`).join('');
 
   $('detailBody').innerHTML = `<div class="loading"><div class="spinner"></div>Loading doctors…</div>`;
   show('detailView');
   window.scrollTo({ top: 0, behavior: 'instant' });
 
+  // One shard — this hospital and its 24 neighbours by code — not the whole roster.
+  let detail;
   try {
-    state.doctors = state.doctors || (await getJSON(`${DATA}/doctors.json`));
+    const shard = await getJSON(`${DATA}/detail/${detailShard(h.code)}.json`);
+    detail = shard.byHospital[h.code] ?? { addr: '', map: '', doctors: [] };
   } catch (err) {
     $('detailBody').innerHTML = `<div class="empty"><strong>Could not load doctors.</strong><p>${esc(err.message)}</p></div>`;
     return;
   }
 
-  const all = state.doctors.filter((d) => d.hospitalCode === h.code);
-  const forSpec = all.filter((d) => state.wanted.has(d.speciality));
-  const others = all.filter((d) => !state.wanted.has(d.speciality));
+  if (detail.addr) $('detailAddr').textContent = detail.addr;
+
+  const all = detail.doctors;
+  const forSpec = all.filter((d) => state.wantedNames.has(d.speciality));
+  const others = all.filter((d) => !state.wantedNames.has(d.speciality));
 
   let html = '';
   if (forSpec.length) {
@@ -452,8 +551,12 @@ async function openHospital(code) {
       .map((d) => doctorCard(d, false)).join('');
   }
 
-  if (h.mapUrl) {
-    html += `<p class="foot"><a href="${esc(h.mapUrl)}" target="_blank" rel="noopener">Open in Google Maps →</a></p>`;
+  // The inventory's own map link when it has one, otherwise a pin at the
+  // coordinates — which is also the fallback if the short link has rotted.
+  const mapUrl = detail.map
+    || (h.lat !== null ? `https://www.google.com/maps/search/?api=1&query=${h.lat},${h.lon}` : '');
+  if (mapUrl) {
+    html += `<p class="foot"><a href="${esc(mapUrl)}" target="_blank" rel="noopener">Open in Google Maps →</a></p>`;
   }
   $('detailBody').innerHTML = html;
 }

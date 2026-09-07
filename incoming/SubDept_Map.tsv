@@ -1,219 +1,219 @@
-SubDepartment_Id	UI_SubDepartment_Name	Department_Id	Department_Name
-705570	Abortion-DNC	705448	Gynaecology
-705571	ACL/PCL-Injuries	705446	Orthopaedic
-705572	Adenoidectomy	705455	ENT
-705573	Appendicitis	705450	Laparoscopy
-705574	Arota	705453	Vascular
-705575	Arthoscopy	705446	Orthopaedic
-705576	Arthritis	705446	Orthopaedic
-705577	Arthroscopy	705446	Orthopaedic
-705578	AV-Fistula	705453	Vascular
-705579	Bariatric-Surgery	705450	Laparoscopy
-705580	Barrage Laser	705454	Ophthalmology
-705581	Bartholins Cysts	705448	Gynaecology
-705582	Bladder Disorders	705452	Urology
-705583	Bladder stones	705452	Urology
-705584	Brain tumor	705469	Neurology
-705585	Breast cancer	705447	Oncology
-705586	Breast Conditions	705448	Gynaecology
-705587	Breast Implants	705458	Aesthetic
-705588	Breast reduction	705458	Aesthetic
-705589	Breast-Augmentation	705458	Aesthetic
-705590	Breast-Surgery	705459	General Surgery
-705591	Bridges	705465	Dental
-705592	Ca Prostate	705447	Oncology
-705593	Cardiology	705449	Cardiology
-705594	Cardiovascular Diseases	705449	Cardiology
-705595	Carotid Artery Stenosis	705453	Vascular
-705596	Cataract	705454	Ophthalmology
-705597	Cerebrovascular Disorders	705451	Neurosurgery
-705598	Chronic Kidney Injury	705467	Nephrology
-705599	Clubfoot Correction	705462	Pediatrics
-705600	Colectomy	705450	Laparoscopy
-705601	Colorectal cancer	705447	Oncology
-705602	Conjuctivitis	705454	Ophthalmology
-705603	Cornea-Retina	705454	Ophthalmology
-705604	Coronary Angiogram	705449	Cardiology
-705605	Coronary Artery disease	705449	Cardiology
-705606	Crowns	705465	Dental
-705607	Deep-Vein-Thrombosis-(DVT)	705453	Vascular
-705608	Delivery	705448	Gynaecology
-705609	Dental Caries	705465	Dental
-705610	Dental Implants	705465	Dental
-705611	Dental-Aligners	705465	Dental
-705612	Dentures	705465	Dental
-705613	Deviated nasal septum	705455	ENT
-705614	Diabetic-Ulcers	705459	General Surgery
-705615	Dilatation & Curettage	705448	Gynaecology
-705616	Dilution and Evacuation	705448	Gynaecology
-705617	Disc prolapse	705446	Orthopaedic
-705618	DJ stent removal	705452	Urology
-705619	Endometriosis	705448	Gynaecology
-705620	Enlarged-Prostate	705452	Urology
-705621	Enlarged-Prostate-(BPH)	705452	Urology
-705622	ENT	705455	ENT
-705623	Epidural Hematoma	705451	Neurosurgery
-705624	Eyelid surgery	705458	Aesthetic
-705625	Family Planning	705448	Gynaecology
-705626	female-infertility	705456	Fertility
-705627	Fertility	705456	Fertility
-705628	FESS	705455	ENT
-705629	Fissure	705460	Proctology
-705630	Fistula	705460	Proctology
-705631	Fractures	705446	Orthopaedic
-705632	Gallstones	705450	Laparoscopy
-705633	Glaucoma	705454	Ophthalmology
-705634	Gynaecology	705448	Gynaecology
-705635	Gynecomastia	705458	Aesthetic
-705636	Hair-Transplant	705458	Aesthetic
-705637	Hymenoplasty	705458	Aesthetic
-705638	Hysterectomy	705448	Gynaecology
-705639	IUI	705456	Fertility
-705640	IVF	705456	Fertility
-705641	Keratocuns	705454	Ophthalmology
-705642	Kidney transplant	705463	Transplant Surgery
-705643	Kidney-Stones	705452	Urology
-705644	Knee meniscal repair	705446	Orthopaedic
-705645	Knee Reconstruction	705446	Orthopaedic
-705646	Laryngeal surgery	705455	ENT
-705647	Lasik	705454	Ophthalmology
-705648	Lip enhancement	705458	Aesthetic
-705649	Lipoma	705459	General Surgery
-705650	Liposuction	705458	Aesthetic
-705651	Lithotripsy	705452	Urology
-705652	Liver Cancer	705447	Oncology
-705653	Liver Disorders	705461	Gastrointestinal
-705654	Liver transplant	705463	Transplant Surgery
-705655	Lumbar puncture	705469	Neurology
-705656	Lung Cancer	705447	Oncology
-705657	Lung disease	705468	Pulmonology
-705658	male-infertility	705456	Fertility
-705659	Mastoid-Surgeryy	705455	ENT
-705660	Maternity	705448	Gynaecology
-705661	Myomectomy	705448	Gynaecology
-705662	Nasal Polyp removal	705455	ENT
-705663	Natural/C-Section	705448	Gynaecology
-705664	Neurosurgery	705451	Neurosurgery
-705665	Nose corrections	705458	Aesthetic
-705666	Obstructive-Apnea	705455	ENT
-705667	Omphalocele Repair	705462	Pediatrics
-705668	Oncology	705447	Oncology
-705669	Ophthalmology	705454	Ophthalmology
-705670	Orchidopexy Surgery	705462	Pediatrics
-705671	Orthopaedic	705446	Orthopaedic
-705672	Ovarian cyst	705448	Gynaecology
-705673	Pancreatic Cancer	705447	Oncology
-705674	Pancreatic Disorders	705461	Gastrointestinal
-705675	Papilledema	705451	Neurosurgery
-705676	PCOD-PCOS	705448	Gynaecology
-705677	Pediatric-ENT	705455	ENT
-705678	Pericardial Effusion	705449	Cardiology
-705679	Periodontal Diseases	705465	Dental
-705680	Peripheral Angiogram	705453	Vascular
-705681	Peripheral Artery Disease	705453	Vascular
-705682	Peripheral vascular disease	705453	Vascular
-705683	Piles	705460	Proctology
-705684	Pregnancy	705448	Gynaecology
-705685	PRK	705454	Ophthalmology
-705686	PTCA	705449	Cardiology
-705687	Pterygium	705454	Ophthalmology
-705688	Ptosis	705454	Ophthalmology
-705689	Raynaud's Disease	705453	Vascular
-705690	Rectal Cancer	705447	Oncology
-705691	Rectal Polyp	705460	Proctology
-705692	Rectal-Prolapse	705450	Laparoscopy
-705693	Rheumatologist	705471	Rheumatologist
-705694	RIRS	705452	Urology
-705695	RIRS With DJ Stenting	705452	Urology
-705696	Root canal treatment	705465	Dental
-705697	Septoplasty	705455	ENT
-705698	Sinus-Surgery	705455	ENT
-705699	Spider-Veins	705453	Vascular
-705700	Spinal cord compression	705446	Orthopaedic
-705701	Spinal decompression	705451	Neurosurgery
-705702	Spinal fractures	705451	Neurosurgery
-705703	Spinal Stenosis	705446	Orthopaedic
-705704	Spinal-Injuries	705446	Orthopaedic
-705705	Spine	705451	Neurosurgery
-705706	Sports Injuries	705446	Orthopaedic
-705707	Squint-Corrections	705454	Ophthalmology
-705708	Sub arachnoid haemorrhage	705451	Neurosurgery
-705709	Thrombectomy	705453	Vascular
-705710	Thyroid-Surgery	705459	General Surgery
-705711	Tonsillectomy	705455	ENT
-705712	Tooth Extraction	705465	Dental
-705713	Tooth Fracture	705465	Dental
-705714	Knee-Replacement	705446	Orthopaedic
-705715	Trans PRK	705454	Ophthalmology
-705716	Tubal-Ligation	705448	Gynaecology
-705717	Tummy tuck	705458	Aesthetic
-705718	Tympanoplasty	705455	ENT
-705719	Urethroplasty	705452	Urology
-705720	Urethrotomy	705452	Urology
-705721	Urinary Tract Infections	705448	Gynaecology
-705722	Urology	705452	Urology
-705723	Urs+ Dj Stenting	705452	Urology
-705724	Uterine cancer	705447	Oncology
-705725	Uterine Polyps	705448	Gynaecology
-705726	Uterine prolapse	705448	Gynaecology
-705727	Uterine-Fibroids	705448	Gynaecology
-705728	Vaginal-Cyst	705448	Gynaecology
-705729	Varicose Veins	705453	Vascular
-705730	Vascular	705453	Vascular
-705731	VP Shunts	705451	Neurosurgery
-705732	Weight loss surgery	705459	General Surgery
-705765	Abscess	705459	General Surgery
-705766	Anal Abscess	705460	Proctology
-705767	Anal stenosis	705460	Proctology
-705768	Botox	705458	Aesthetic
-705769	Bronchial Asthma/ILD	705457	General Medicine
-705770	Carpal-tunnel	705446	Orthopaedic
-705771	Cervical Cancer	705447	Oncology
-705772	Circumcision	705452	Urology
-705773	Corn	705459	General Surgery
-705774	Dengue	705457	General Medicine
-705775	Dermal Fillers	705458	Aesthetic
-705776	Dermatology	705458	Aesthetic
-705777	Face lift	705458	Aesthetic
-705778	Facial Implants	705458	Aesthetic
-705779	Ganglion cysts	705446	Orthopaedic
-705780	Gastrointestinal surgery	705461	Gastrointestinal
-705781	General Medicine	705457	General Medicine
-705782	GERD-Achalasia	705461	Gastrointestinal
-705783	GERD/Acute Gastroenteritis	705461	Gastrointestinal
-705784	Head and neck cancer	705447	Oncology
-705785	Hernia	705450	Laparoscopy
-705786	Hormone Imbalance	705464	Endocrinology
-705787	Hydrocele	705452	Urology
-705788	Hypertensive disease	705457	General Medicine
-705789	IBD	705461	Gastrointestinal
-705790	Ingrown toenail	705459	General Surgery
-705791	Intragastric Balloon	705461	Gastrointestinal
-705792	Irritable Bowel Syndrome	705461	Gastrointestinal
-705793	Ladd's Procedure	705459	General Surgery
-705794	Laparoscopy	705450	Laparoscopy
-705795	Maxilofacial Surgery	705459	General Surgery
-705796	Mole-Removal	705458	Aesthetic
-705797	Mouth cancer	705447	Oncology
-705798	Musculoskeletal Injuries	705446	Orthopaedic
-705799	Oral Cancer	705447	Oncology
-705800	Ovarian cancer	705447	Oncology
-705801	Peptic ulcers	705459	General Surgery
-705802	Pilonidal Sinus	705459	General Surgery
-705803	Pilonidal-Sinus	705460	Proctology
-705804	Platelet-rich plasma	705458	Aesthetic
-705805	Rhinoplasty	705458	Aesthetic
-705806	Rotator cuff tear	705446	Orthopaedic
-705807	Shoulder-Injuries	705446	Orthopaedic
-705808	Sphincteroplasty	705460	Proctology
-705809	Stomach cancer	705447	Oncology
-705810	Tendon injuries	705446	Orthopaedic
-705811	Testis	705452	Urology
-705812	Hip-Replacement	705446	Orthopaedic
-705813	Transplant Surgery	705463	Transplant Surgery
-705814	Trigger finger	705446	Orthopaedic
-705815	Varicocele	705452	Urology
-705816	Vasectomy	705452	Urology
-705817	Viral Fever/Flu	705457	General Medicine
-711759	Phimosis	705452	Urology
-715630	Circumcision & Frenuloplasty	705459	General Surgery
+SubDepartment_Id	UI_SubDepartment_Name	Department_Id	Department_Name	Specialities
+705570	Abortion-DNC	705448	Gynaecology	
+705571	ACL/PCL-Injuries	705446	Orthopaedic	
+705572	Adenoidectomy	705455	ENT	
+705573	Appendicitis	705450	Laparoscopy	
+705574	Arota	705453	Vascular	
+705575	Arthoscopy	705446	Orthopaedic	
+705576	Arthritis	705446	Orthopaedic	
+705577	Arthroscopy	705446	Orthopaedic	
+705578	AV-Fistula	705453	Vascular	
+705579	Bariatric-Surgery	705450	Laparoscopy	
+705580	Barrage Laser	705454	Ophthalmology	
+705581	Bartholins Cysts	705448	Gynaecology	
+705582	Bladder Disorders	705452	Urology	
+705583	Bladder stones	705452	Urology	
+705584	Brain tumor	705469	Neurology	Neurosurgery|Surgical Oncology|Oncology
+705585	Breast cancer	705447	Oncology	
+705586	Breast Conditions	705448	Gynaecology	
+705587	Breast Implants	705458	Aesthetic	Plastic Surgery
+705588	Breast reduction	705458	Aesthetic	Plastic Surgery
+705589	Breast-Augmentation	705458	Aesthetic	Plastic Surgery
+705590	Breast-Surgery	705459	General Surgery	
+705591	Bridges	705465	Dental	
+705592	Ca Prostate	705447	Oncology	
+705593	Cardiology	705449	Cardiology	
+705594	Cardiovascular Diseases	705449	Cardiology	
+705595	Carotid Artery Stenosis	705453	Vascular	
+705596	Cataract	705454	Ophthalmology	
+705597	Cerebrovascular Disorders	705451	Neurosurgery	
+705598	Chronic Kidney Injury	705467	Nephrology	
+705599	Clubfoot Correction	705462	Pediatrics	Pediatrics|Pediatrics and Neonatology|Ortho Surgery
+705600	Colectomy	705450	Laparoscopy	
+705601	Colorectal cancer	705447	Oncology	
+705602	Conjuctivitis	705454	Ophthalmology	
+705603	Cornea-Retina	705454	Ophthalmology	
+705604	Coronary Angiogram	705449	Cardiology	
+705605	Coronary Artery disease	705449	Cardiology	
+705606	Crowns	705465	Dental	
+705607	Deep-Vein-Thrombosis-(DVT)	705453	Vascular	
+705608	Delivery	705448	Gynaecology	
+705609	Dental Caries	705465	Dental	
+705610	Dental Implants	705465	Dental	
+705611	Dental-Aligners	705465	Dental	
+705612	Dentures	705465	Dental	
+705613	Deviated nasal septum	705455	ENT	
+705614	Diabetic-Ulcers	705459	General Surgery	
+705615	Dilatation & Curettage	705448	Gynaecology	
+705616	Dilution and Evacuation	705448	Gynaecology	
+705617	Disc prolapse	705446	Orthopaedic	
+705618	DJ stent removal	705452	Urology	
+705619	Endometriosis	705448	Gynaecology	
+705620	Enlarged-Prostate	705452	Urology	
+705621	Enlarged-Prostate-(BPH)	705452	Urology	
+705622	ENT	705455	ENT	
+705623	Epidural Hematoma	705451	Neurosurgery	
+705624	Eyelid surgery	705458	Aesthetic	Plastic Surgery|Ophthalmology
+705625	Family Planning	705448	Gynaecology	
+705626	female-infertility	705456	Fertility	Reproductive Medicine|IVF & Gynec|OBG|AyurVaid OBG
+705627	Fertility	705456	Fertility	Reproductive Medicine|IVF & Gynec|OBG|AyurVaid OBG
+705628	FESS	705455	ENT	
+705629	Fissure	705460	Proctology	
+705630	Fistula	705460	Proctology	
+705631	Fractures	705446	Orthopaedic	
+705632	Gallstones	705450	Laparoscopy	
+705633	Glaucoma	705454	Ophthalmology	
+705634	Gynaecology	705448	Gynaecology	
+705635	Gynecomastia	705458	Aesthetic	Plastic Surgery|General Surgery
+705636	Hair-Transplant	705458	Aesthetic	Hair Transplant|Hair Transplant & Dermataology
+705637	Hymenoplasty	705458	Aesthetic	Plastic Surgery|OBG
+705638	Hysterectomy	705448	Gynaecology	
+705639	IUI	705456	Fertility	Reproductive Medicine|IVF & Gynec|OBG|AyurVaid OBG
+705640	IVF	705456	Fertility	Reproductive Medicine|IVF & Gynec|OBG|AyurVaid OBG
+705641	Keratocuns	705454	Ophthalmology	
+705642	Kidney transplant	705463	Transplant Surgery	Urology|Nephrology|NEPHROLOGY|General Surgery
+705643	Kidney-Stones	705452	Urology	
+705644	Knee meniscal repair	705446	Orthopaedic	
+705645	Knee Reconstruction	705446	Orthopaedic	
+705646	Laryngeal surgery	705455	ENT	
+705647	Lasik	705454	Ophthalmology	
+705648	Lip enhancement	705458	Aesthetic	Dermataology|Medical Cosmetology|Plastic Surgery
+705649	Lipoma	705459	General Surgery	
+705650	Liposuction	705458	Aesthetic	Plastic Surgery
+705651	Lithotripsy	705452	Urology	
+705652	Liver Cancer	705447	Oncology	
+705653	Liver Disorders	705461	Gastrointestinal	Medical Gastroenterology|General Medicine|Internal Medicine
+705654	Liver transplant	705463	Transplant Surgery	Surgical Gastroenterology|General Surgery
+705655	Lumbar puncture	705469	Neurology	Neurosurgery|General Medicine|Internal Medicine
+705656	Lung Cancer	705447	Oncology	
+705657	Lung disease	705468	Pulmonology	
+705658	male-infertility	705456	Fertility	Reproductive Medicine|IVF & Gynec|Urology
+705659	Mastoid-Surgeryy	705455	ENT	
+705660	Maternity	705448	Gynaecology	
+705661	Myomectomy	705448	Gynaecology	
+705662	Nasal Polyp removal	705455	ENT	
+705663	Natural/C-Section	705448	Gynaecology	
+705664	Neurosurgery	705451	Neurosurgery	
+705665	Nose corrections	705458	Aesthetic	Plastic Surgery|ENT
+705666	Obstructive-Apnea	705455	ENT	
+705667	Omphalocele Repair	705462	Pediatrics	Pediatrics|Pediatrics and Neonatology|Neonatology|General Surgery
+705668	Oncology	705447	Oncology	
+705669	Ophthalmology	705454	Ophthalmology	
+705670	Orchidopexy Surgery	705462	Pediatrics	Pediatrics|Pediatrics and Neonatology|Urology|General Surgery
+705671	Orthopaedic	705446	Orthopaedic	
+705672	Ovarian cyst	705448	Gynaecology	
+705673	Pancreatic Cancer	705447	Oncology	
+705674	Pancreatic Disorders	705461	Gastrointestinal	Medical Gastroenterology|Surgical Gastroenterology|General Medicine
+705675	Papilledema	705451	Neurosurgery	
+705676	PCOD-PCOS	705448	Gynaecology	
+705677	Pediatric-ENT	705455	ENT	
+705678	Pericardial Effusion	705449	Cardiology	
+705679	Periodontal Diseases	705465	Dental	
+705680	Peripheral Angiogram	705453	Vascular	
+705681	Peripheral Artery Disease	705453	Vascular	
+705682	Peripheral vascular disease	705453	Vascular	
+705683	Piles	705460	Proctology	
+705684	Pregnancy	705448	Gynaecology	
+705685	PRK	705454	Ophthalmology	
+705686	PTCA	705449	Cardiology	
+705687	Pterygium	705454	Ophthalmology	
+705688	Ptosis	705454	Ophthalmology	
+705689	Raynaud's Disease	705453	Vascular	
+705690	Rectal Cancer	705447	Oncology	
+705691	Rectal Polyp	705460	Proctology	
+705692	Rectal-Prolapse	705450	Laparoscopy	
+705693	Rheumatologist	705471	Rheumatologist	
+705694	RIRS	705452	Urology	
+705695	RIRS With DJ Stenting	705452	Urology	
+705696	Root canal treatment	705465	Dental	
+705697	Septoplasty	705455	ENT	
+705698	Sinus-Surgery	705455	ENT	
+705699	Spider-Veins	705453	Vascular	
+705700	Spinal cord compression	705446	Orthopaedic	
+705701	Spinal decompression	705451	Neurosurgery	
+705702	Spinal fractures	705451	Neurosurgery	
+705703	Spinal Stenosis	705446	Orthopaedic	
+705704	Spinal-Injuries	705446	Orthopaedic	
+705705	Spine	705451	Neurosurgery	
+705706	Sports Injuries	705446	Orthopaedic	
+705707	Squint-Corrections	705454	Ophthalmology	
+705708	Sub arachnoid haemorrhage	705451	Neurosurgery	
+705709	Thrombectomy	705453	Vascular	
+705710	Thyroid-Surgery	705459	General Surgery	
+705711	Tonsillectomy	705455	ENT	
+705712	Tooth Extraction	705465	Dental	
+705713	Tooth Fracture	705465	Dental	
+705714	Knee-Replacement	705446	Orthopaedic	
+705715	Trans PRK	705454	Ophthalmology	
+705716	Tubal-Ligation	705448	Gynaecology	
+705717	Tummy tuck	705458	Aesthetic	Plastic Surgery
+705718	Tympanoplasty	705455	ENT	
+705719	Urethroplasty	705452	Urology	
+705720	Urethrotomy	705452	Urology	
+705721	Urinary Tract Infections	705448	Gynaecology	
+705722	Urology	705452	Urology	
+705723	Urs+ Dj Stenting	705452	Urology	
+705724	Uterine cancer	705447	Oncology	
+705725	Uterine Polyps	705448	Gynaecology	
+705726	Uterine prolapse	705448	Gynaecology	
+705727	Uterine-Fibroids	705448	Gynaecology	
+705728	Vaginal-Cyst	705448	Gynaecology	
+705729	Varicose Veins	705453	Vascular	
+705730	Vascular	705453	Vascular	
+705731	VP Shunts	705451	Neurosurgery	
+705732	Weight loss surgery	705459	General Surgery	
+705765	Abscess	705459	General Surgery	
+705766	Anal Abscess	705460	Proctology	
+705767	Anal stenosis	705460	Proctology	
+705768	Botox	705458	Aesthetic	Dermataology|Medical Cosmetology|Hair Transplant & Dermataology|Plastic Surgery
+705769	Bronchial Asthma/ILD	705457	General Medicine	Pulmonology|General Medicine|Internal Medicine
+705770	Carpal-tunnel	705446	Orthopaedic	
+705771	Cervical Cancer	705447	Oncology	
+705772	Circumcision	705452	Urology	
+705773	Corn	705459	General Surgery	
+705774	Dengue	705457	General Medicine	General Medicine|Internal Medicine|AyurVaid General Medicine
+705775	Dermal Fillers	705458	Aesthetic	Dermataology|Medical Cosmetology|Hair Transplant & Dermataology|Plastic Surgery
+705776	Dermatology	705458	Aesthetic	Dermataology|Medical Cosmetology|Hair Transplant & Dermataology
+705777	Face lift	705458	Aesthetic	Plastic Surgery
+705778	Facial Implants	705458	Aesthetic	Plastic Surgery
+705779	Ganglion cysts	705446	Orthopaedic	
+705780	Gastrointestinal surgery	705461	Gastrointestinal	Surgical Gastroenterology|General Surgery|Laparoscopy
+705781	General Medicine	705457	General Medicine	General Medicine|Internal Medicine|AyurVaid General Medicine
+705782	GERD-Achalasia	705461	Gastrointestinal	Surgical Gastroenterology|Medical Gastroenterology|General Surgery
+705783	GERD/Acute Gastroenteritis	705461	Gastrointestinal	Medical Gastroenterology|General Medicine|Internal Medicine
+705784	Head and neck cancer	705447	Oncology	
+705785	Hernia	705450	Laparoscopy	
+705786	Hormone Imbalance	705464	Endocrinology	
+705787	Hydrocele	705452	Urology	
+705788	Hypertensive disease	705457	General Medicine	General Medicine|Internal Medicine|AyurVaid General Medicine|Cardiology
+705789	IBD	705461	Gastrointestinal	Medical Gastroenterology|General Medicine|Internal Medicine
+705790	Ingrown toenail	705459	General Surgery	
+705791	Intragastric Balloon	705461	Gastrointestinal	Surgical Gastroenterology|General Surgery|Laparoscopy
+705792	Irritable Bowel Syndrome	705461	Gastrointestinal	Medical Gastroenterology|General Medicine|Internal Medicine
+705793	Ladd's Procedure	705459	General Surgery	
+705794	Laparoscopy	705450	Laparoscopy	
+705795	Maxilofacial Surgery	705459	General Surgery	
+705796	Mole-Removal	705458	Aesthetic	Dermataology|Medical Cosmetology|Hair Transplant & Dermataology|Plastic Surgery
+705797	Mouth cancer	705447	Oncology	
+705798	Musculoskeletal Injuries	705446	Orthopaedic	
+705799	Oral Cancer	705447	Oncology	
+705800	Ovarian cancer	705447	Oncology	
+705801	Peptic ulcers	705459	General Surgery	
+705802	Pilonidal Sinus	705459	General Surgery	
+705803	Pilonidal-Sinus	705460	Proctology	
+705804	Platelet-rich plasma	705458	Aesthetic	Dermataology|Medical Cosmetology|Hair Transplant & Dermataology
+705805	Rhinoplasty	705458	Aesthetic	Plastic Surgery|ENT
+705806	Rotator cuff tear	705446	Orthopaedic	
+705807	Shoulder-Injuries	705446	Orthopaedic	
+705808	Sphincteroplasty	705460	Proctology	
+705809	Stomach cancer	705447	Oncology	
+705810	Tendon injuries	705446	Orthopaedic	
+705811	Testis	705452	Urology	
+705812	Hip-Replacement	705446	Orthopaedic	
+705813	Transplant Surgery	705463	Transplant Surgery	General Surgery|Urology|Nephrology
+705814	Trigger finger	705446	Orthopaedic	
+705815	Varicocele	705452	Urology	
+705816	Vasectomy	705452	Urology	
+705817	Viral Fever/Flu	705457	General Medicine	General Medicine|Internal Medicine|AyurVaid General Medicine
+711759	Phimosis	705452	Urology	
+715630	Circumcision & Frenuloplasty	705459	General Surgery	

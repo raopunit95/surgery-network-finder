@@ -13,7 +13,7 @@ import { readFileSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { join, extname } from 'node:path';
 import { createRequire } from 'node:module';
-import { ROOT } from './lib.mjs';
+import { ROOT, unpackHospitals, detailShard } from './lib.mjs';
 
 // Playwright is a dev-only dependency and this repo ships with none installed.
 // Resolve it from wherever it lives (local node_modules or a global install)
@@ -45,8 +45,20 @@ const server = createServer((req, res) => {
 await new Promise((r) => server.listen(0, r));
 const base = `http://127.0.0.1:${server.address().port}`;
 
-const H = JSON.parse(readFileSync(join(ROOT, 'data', 'hospitals.json'), 'utf8'));
+// Decoded with the tools' own unpacker. app.js necessarily carries a second copy
+// of that logic — it has no imports — so a card's insurer count is compared
+// against this below. That is the only check that the two decoders agree, and a
+// disagreement would silently mis-filter every insurer search.
+const H = unpackHospitals(JSON.parse(readFileSync(join(ROOT, 'data', 'hospitals.json'), 'utf8')));
 const S = JSON.parse(readFileSync(join(ROOT, 'data', 'surgeries.json'), 'utf8'));
+const byHospitalCode = new Map(H.map((h) => [h.code, h]));
+
+/** What the shard on disk holds for one hospital — the same file the page fetches. */
+const detailFor = (code) => {
+  const file = join(ROOT, 'data', 'detail', `${detailShard(code)}.json`);
+  const shard = JSON.parse(readFileSync(file, 'utf8'));
+  return shard.byHospital[code] ?? { addr: '', map: '', doctors: [] };
+};
 
 // Fixed smoke cases, chosen to exercise each resolution path rather than whichever
 // surgery happens to have the widest coverage. Piles and Hernia go through a
@@ -57,6 +69,7 @@ const CASES = ['Piles', 'Hernia', 'IVF', 'Cataract', 'Knee-Replacement'];
 const RANGE = 60;
 
 const byName = new Map(S.map((x) => [x.name.toLowerCase(), x]));
+const byNameMap = byName;
 
 // Derive each case's pincode from the data rather than hard-coding a city: pick the
 // pincode of the highest-scoring hospital that actually offers the surgery. That
@@ -124,8 +137,38 @@ for (const c of cases) {
 
   const cards = await page.$$('#resultsBody [data-code]');
   if (!cards.length) fail(`zero hospitals for ${c.surgery} near ${c.pin} — a taxonomy or data regression`);
-  ok(`${cards.length} hospitals · ${(await page.textContent('#resultsSub'))?.trim()}`);
+  const unfilteredTotal = Number(((await page.textContent('.sort-count')) || '').match(/of\s+([\d,]+)/)?.[1].replace(/,/g, '')) || cards.length;
+  ok(`${cards.length} of ${unfilteredTotal} hospitals · ${(await page.textContent('#resultsSub'))?.trim()}`);
 
+  // Every card must say which department matched, and it must be one the surgery
+  // actually targets — this is the check that catches an over-broad mapping.
+  const targeted = new Set(byNameMap.get(c.surgery.toLowerCase())?.specialities || []);
+  const chips = await page.$$eval('#resultsBody .card-hit span', (els) => els.map((e) => e.textContent.trim()));
+  if (!chips.length) fail(`no matched-speciality chip on any card for ${c.surgery}`);
+  const stray = [...new Set(chips)].filter((x) => !targeted.has(x));
+  if (stray.length) fail(`${c.surgery} matched on specialities it does not target: ${stray.join(', ')}`);
+  ok(`matched via ${[...new Set(chips)].join(', ')}`);
+
+  // The page decoded the insurer bitmask itself. If its decoder and the tools'
+  // disagree by even one bit, every insurer filter is quietly wrong — so compare.
+  const shown = await page.$$eval('#resultsBody [data-code]', (els) => els.map((el) => ({
+    code: el.dataset.code,
+    insurers: Number((el.querySelector('.card-meta')?.textContent.match(/(\d+)\s*insurers/) || [])[1]),
+    specialities: Number((el.querySelector('.card-meta')?.textContent.match(/(\d+)\s*specialities/) || [])[1]),
+  })));
+  for (const s of shown) {
+    const h = byHospitalCode.get(s.code);
+    if (!h) fail(`the page rendered hospital ${s.code}, which is not in hospitals.json`);
+    if (s.insurers !== h.insurers.length) {
+      fail(`insurer bitmask decoded differently: the page says ${s.insurers} for ${s.code}, the tools say ${h.insurers.length}`);
+    }
+    if (Number.isFinite(s.specialities) && s.specialities !== h.specialities.length) {
+      fail(`speciality dictionary decoded differently for ${s.code}: page ${s.specialities}, tools ${h.specialities.length}`);
+    }
+  }
+  ok(`compact format decodes identically in the browser (${shown.length} cards checked)`);
+
+  const openedCode = await cards[0].getAttribute('data-code');
   await cards[0].click();
   await page.waitForSelector('#detailView.is-active', { timeout: 10000 });
   const name = (await page.textContent('#detailName'))?.trim();
@@ -135,7 +178,21 @@ for (const c of cases) {
   ).catch(() => {});
   const detail = (await page.textContent('#detailBody'))?.trim() || '';
   if (!detail) fail(`hospital detail rendered empty for ${name}`);
-  ok(`detail opens — ${name}`);
+
+  // The address, map link and doctor roster live in the detail shard now, not in
+  // hospitals.json. If the shard rule in app.js drifts from the one in lib.mjs,
+  // search keeps working perfectly and every hospital page fails to load its
+  // detail — so compare the rendered page against the shard file on disk.
+  const expected = detailFor(openedCode);
+  const addr = (await page.textContent('#detailAddr'))?.trim() || '';
+  if (expected.addr && addr !== expected.addr) {
+    fail(`detail shard did not reach the page for ${openedCode}:\n    page  "${addr}"\n    shard "${expected.addr}"`);
+  }
+  const shownDoctors = (await page.$$('#detailBody .doc')).length;
+  if (shownDoctors !== expected.doctors.length) {
+    fail(`${openedCode} lists ${expected.doctors.length} doctors in its shard but the page rendered ${shownDoctors}`);
+  }
+  ok(`detail opens — ${name} · shard gave ${shownDoctors} doctor${shownDoctors === 1 ? '' : 's'} and the address`);
   console.log(`   ${detail.split('\n').map((l) => l.trim()).filter(Boolean).slice(0, 2).join(' · ').slice(0, 120)}`);
 
   // Every view carries the profile link.
@@ -161,16 +218,17 @@ for (const c of cases) {
   await pick('#insurerInput', '#insurerList', 'Star Health');
   await page.click('#searchBtn');
   await page.waitForSelector('#resultsView.is-active');
-  const filtered = (await page.$$('#resultsBody [data-code]')).length;
+  // Compare the "N of M" total, not the card count: the cap is 24, so both sides
+  // read 24 whether the filter did anything or not and the check proves nothing.
+  const matchedTotal = async () =>
+    Number(((await page.textContent('.sort-count').catch(() => '')) || '').match(/of\s+([\d,]+)/)?.[1].replace(/,/g, ''))
+    || (await page.$$('#resultsBody [data-code]')).length;
+  const filtered = await matchedTotal();
   const widened = await page.locator('.notice').count() > 0;
-  if (widened) {
-    // Legitimate: the filter emptied the in-range set, so the fallback fired and is
-    // now showing distant hospitals. A higher count here is the feature working.
-    ok(`Star Health emptied the ${RANGE} km radius — fallback widened to ${filtered}`);
-  } else {
-    if (filtered > cards.length) fail(`insurer filter widened the result set without widening the radius: ${cards.length} → ${filtered}`);
-    ok(`Star Health narrows ${cards.length} → ${filtered}`);
+  if (filtered > unfilteredTotal) {
+    fail(`insurer filter widened the network: ${unfilteredTotal} → ${filtered} hospitals for ${c.surgery}`);
   }
+  ok(`Star Health narrows the network ${unfilteredTotal} → ${filtered}${widened ? ' (radius widened to fill the page)' : ''}`);
 }
 
 /* A pincode with no hospital inside RANGE must widen rather than show nothing.

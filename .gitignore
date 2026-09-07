@@ -1,7 +1,13 @@
-# Raw exports — never commit. They carry columns the app does not use
-# (hospital emails, internal record IDs, ops workflow dates).
-incoming/*.csv
+# Raw exports — never commit. These rows carry hospital and escalation email
+# addresses, internal record IDs and upstream system IDs that the build strips
+# out of data/. Removing these rules publishes all of it.
 incoming/*.xlsx
+incoming/*.xls
+incoming/*.csv
+
+# Generated work queue: suggested Dept_Map lines awaiting review. Regenerated on
+# every refresh, so committing it would just create conflicts.
+incoming/Dept_Map.suggested.tsv
 
 # Secrets
 .env

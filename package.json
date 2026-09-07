@@ -1,21 +1,21 @@
 {
   "name": "surgery-network-finder",
-  "version": "1.0.0",
-  "description": "Find cashless hospitals near a pincode by speciality and insurer, then see the doctors at that hospital. Static site, no backend.",
+  "version": "2.0.0",
+  "description": "Find cashless hospitals near a pincode by surgery and insurer, then see the doctors at that hospital. Static site, no backend, no dependencies.",
   "type": "module",
   "private": true,
   "scripts": {
-    "sync": "node tools/sync.mjs",
-    "sync:dry": "node tools/sync.mjs --dry-run",
-    "import": "node tools/import-csv.mjs",
-    "import:dry": "node tools/import-csv.mjs --dry-run",
-    "sample": "node tools/make-sample-data.mjs",
+    "refresh": "node tools/refresh.mjs && node tools/check.mjs",
+    "refresh:dry": "node tools/refresh.mjs --dry-run",
+    "refresh:sheet": "node tools/refresh.mjs --source=sheet && node tools/check.mjs",
+    "sample": "node tools/refresh.mjs --source=sample && node tools/check.mjs",
+    "check": "node tools/check.mjs",
+    "test": "node tools/test-taxonomy.mjs && node tools/test-e2e.mjs",
+    "test:map": "node tools/test-taxonomy.mjs",
     "pincodes": "node tools/build-pincodes.mjs",
-    "surgeries": "node tools/build-surgeries.mjs",
-    "overrides": "node tools/apply-overrides.mjs",
-    "test": "node tools/test-overrides.mjs && node tools/test-e2e.mjs",
-    "test:e2e": "node tools/test-e2e.mjs",
     "serve": "python3 -m http.server 8080"
   },
-  "engines": { "node": ">=18" }
+  "engines": {
+    "node": ">=18"
+  }
 }

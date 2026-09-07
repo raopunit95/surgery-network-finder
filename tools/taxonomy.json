@@ -1,0 +1,99 @@
+{
+  "_comment": [
+    "Everything about the department vocabulary lives here. It replaces the old departments.json.",
+    "",
+    "The chain the site walks, and where each link is defined:",
+    "",
+    "  surgery ──► primary department ──► secondary department ──► speciality ──► hospital, doctor",
+    "  SubDept_Map.tsv          this file, 'secondary'          Dept_Map.tsv       Inventory.xlsx",
+    "",
+    "Two of the four links are sheets you own. This file holds the two judgement calls:",
+    "which spellings mean the same thing, and which department may stand in for another."
+  ],
+
+  "specialityAliases": {
+    "_comment": [
+      "canonical spelling → the spellings the inventory actually contains.",
+      "",
+      "Applied to EVERY speciality on the way in — hospitals, doctors, Dept_Map.tsv and the",
+      "Specialities column of SubDept_Map.tsv alike. That is the point: before this existed, a",
+      "value in SubDept_Map had to reproduce the sheet's typos exactly or it silently matched",
+      "nothing. Now either spelling works and the site displays the correct one.",
+      "",
+      "Add a line here when a refresh reports a new spelling of something already known.",
+      "Do NOT add a line to merge two genuinely different specialities — that is what",
+      "Dept_Map.tsv is for."
+    ],
+    "Dermatology": ["Dermataology", "Dermatalogy", "Dermetology"],
+    "Nephrology": ["NEPHROLOGY"],
+    "Oncology": ["ONCOLOGY"],
+    "Ophthalmology": ["Opthalmology", "OPHTHALMOLOGY"],
+    "Gynaecology": ["Gynecology"],
+    "Orthopaedics": ["Orthopedics"]
+  },
+
+  "specialitySplits": {
+    "_comment": [
+      "One inventory cell that names two specialities. Split so each is matched on its own:",
+      "a hospital listed as 'Hair Transplant & Dermataology' really does do dermatology, and",
+      "before this it could only ever be found by a hair-transplant search.",
+      "",
+      "'IVF & Gynec' is deliberately NOT split — it is the name of a single unit, and",
+      "Dept_Map.tsv already routes it to both Fertility and Gynaecology."
+    ],
+    "Hair Transplant & Dermataology": ["Hair Transplant", "Dermatology"],
+    "Pediatrics and Neonatology": ["Pediatrics", "Neonatology"]
+  },
+
+  "secondary": {
+    "_comment": [
+      "department → departments that may also satisfy it.",
+      "",
+      "A secondary department says: this surgery is commonly performed by another team, so a",
+      "hospital listing that other department should also match. Resolution is transitive and",
+      "cycle-safe. Without these, 'Piles' returns nothing — its department is Proctology and no",
+      "active hospital lists Proctology, even though Proctology exists in the speciality master."
+    ],
+    "Laparoscopy": ["General Surgery"],
+    "Proctology": ["General Surgery"],
+    "General Medicine": ["General Surgery"],
+    "Fertility": ["Gynaecology"],
+
+    "Gastrointestinal": ["General Surgery"],
+    "Transplant Surgery": ["General Surgery"],
+    "Neurology": ["Neurosurgery"]
+  },
+
+  "autoMap": {
+    "_comment": [
+      "How a speciality the inventory contains but Dept_Map.tsv does not is handled.",
+      "",
+      "Rules under 'apply' are deterministic and reversible — they restate a mapping you already",
+      "made, they never invent one. Anything they cannot settle is written to",
+      "incoming/Dept_Map.suggested.tsv with a confidence score and is NOT used: those hospitals",
+      "stay unreachable until you paste the line you agree with into Dept_Map.tsv. That is the",
+      "same bargain as `npm run check` — name the problem, do not paper over it."
+    ],
+    "apply": {
+      "selfIsDepartment": true,
+      "stripLeadingBrandWord": true,
+      "differsOnlyByModifier": true,
+      "splitOnConjunction": true
+    },
+    "brandWords": ["AyurVaid", "Apollo", "Fortis", "Manipal", "Max", "Medanta", "Narayana"],
+    "_modifierWordsComment": [
+      "Words that qualify a speciality without changing which department it belongs to.",
+      "'Surgical Gastroenterology' and 'Medical Gastroenterology' differ only by one of these,",
+      "so a new one of the pair inherits the department of the one already mapped.",
+      "",
+      "The rule is set equality on the remaining words, NOT a shared word. A shared word is",
+      "not enough: 'Renal Transplant' and 'Hair Transplant' share 'transplant' and belong",
+      "nowhere near each other, and the loose version of this rule filed kidney transplants",
+      "under Aesthetic. If the remaining words are not identical it is a judgement call, and",
+      "judgement calls are suggested, never applied."
+    ],
+    "modifierWords": ["surgery", "surgical", "medical", "medicine", "general", "interventional",
+      "clinical", "advanced", "department", "dept", "unit", "and", "of", "the"],
+    "suggestAboveSimilarity": 0.45
+  }
+}
